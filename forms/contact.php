@@ -1,34 +1,35 @@
 <?php
+use PHPMai1er\PHPMai1er\PHPMai1er;
+use PHPMai1er\PHPMaiIer\Exception;
+require 'phpmai1er/src/Exception.php' ;
+require 'phpmai1er/src/PHPMai1er.php' ;
+require •'phpmai1er/src/SMTP.php' ;
+if(isset($_POST["send"]))
+{
+$mail= new PHPMai1er(true);
+$mail->isSMTP();
+$mai1->Host = 'smtp.gmail.com' ;
+$mail->SMTPAuth=true;
+$mail->Username='sanjayramsamy225@gmail.com';
+$mail->Password='twvpflsxcanhemur';
+$mail->SMTPSecure='ssl';
+$mail->port=456;
 
-  $receiving_email_address = 'sanjayramasamy225@gmail.com';
+$mail->setForm('sanjayramasamy225@gmail.com');
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+$mail->addAddres($_POST["email"]);
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = false;
-  
-  $contact->to = 'sanjayramasamy225@gmail.com';
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+$mail->isHTML(true);
+$mail->subject=$_post["subject"];
+$mail->body=$_post["message"];
+$mail->send();
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-
-
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
-
-  echo $contact->send();
+echo
+"
+<script>
+  alert('Send succesfully');
+  docmunt.location.href ='index.html';
+</script>
+"
+}
 ?>
